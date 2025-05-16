@@ -40,6 +40,15 @@ public class TimerManager : MonoBehaviour
     GameOverCanvas.SetActive(true);
     foreach (GameObject platform in GameObject.FindGameObjectsWithTag("Platform"))
     Destroy(platform);
+    // Сохраняем рекорд, если текущий счёт больше
+int currentScore = GameManager.instance.GetScore();
+int bestScore = PlayerPrefs.GetInt("Record", 0);
+
+if (currentScore > bestScore)
+{
+    PlayerPrefs.SetInt("Record", currentScore);
+    PlayerPrefs.Save(); // Сохраняем изменения
+}
 
     finalScoreText.text = "Score: " + GameManager.instance.GetScore().ToString();
     finalRecordText.text = PlayerPrefs.GetInt("Record", 0).ToString(); // Если ты сохраняешь рекорд
