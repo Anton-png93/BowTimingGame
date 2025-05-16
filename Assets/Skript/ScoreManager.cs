@@ -1,27 +1,32 @@
-using UnityEngine;
 using TMPro;
+using UnityEngine;
+using UnityEngine.UI;
 
 public class ScoreManager : MonoBehaviour
 {
-    public static ScoreManager instance;
+    public int score = 0;
+    public TMP_Text scoreText;
 
-    private int score = 0;
+    public TimerManager timerManager; // ссылка на таймер
 
-    public TextMeshProUGUI scoreText;
-
-    void Awake()
+    void Start()
     {
-        instance = this;
+        UpdateScoreUI();
     }
 
-    public void AddScore(int value)
+    public void AddPoints(int amount)
     {
-        score += value;
-        scoreText.text = "SCORE: " + score.ToString();
+        score += amount;
+        UpdateScoreUI();
+
+        if (timerManager != null)
+        {
+            timerManager.AddTime(2f); // добавляем 2 секунды
+        }
     }
 
-    public int GetScore()
+    void UpdateScoreUI()
     {
-        return score;
+        scoreText.text = "Score: " + score.ToString();
     }
 }
