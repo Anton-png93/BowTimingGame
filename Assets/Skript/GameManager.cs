@@ -1,5 +1,7 @@
 using TMPro;
 using UnityEngine;
+using UnityEngine.SceneManagement;
+
 
 public class GameManager : MonoBehaviour
 {
@@ -17,16 +19,16 @@ public class GameManager : MonoBehaviour
         instance = this;
     }
 
-        void Start()
+    void Start()
     {
-    score = 0;              // 👈 ЗДЕСЬ ставь нужное число (например, 100)
-    //UpdateScoreUI();          // ⬅ Обновляет текст на экране
+        score = 0;              // 👈 ЗДЕСЬ ставь нужное число (например, 100)
+                                //UpdateScoreUI();          // ⬅ Обновляет текст на экране
     }
 
     public void AddScore(int points)
     {
         score += points;
-       // UpdateScoreUI();
+        // UpdateScoreUI();
 
         // Проверяем, набрано ли ещё +10 очков с последнего ускорения
         if (score >= lastSpeedIncreaseScore + 10)
@@ -34,22 +36,27 @@ public class GameManager : MonoBehaviour
             lastSpeedIncreaseScore = score;
 
             foreach (ObstacleMover mover in obstacles)
-        {
-            if (mover != null)
-            mover.speed += 0.5f;
-        }
+            {
+                if (mover != null)
+                    mover.speed += 0.5f;
+            }
 
             Debug.Log("Скорость увеличена! Текущие очки: " + score);
         }
     }
 
-     //void UpdateScoreUI()
+    //void UpdateScoreUI()
     //{
-       // scoreText.text = "SCORE: " + score.ToString();
-   // }
+    // scoreText.text = "SCORE: " + score.ToString();
+    // }
 
     public int GetScore()  // ← ВСТАВЬ СЮДА
     {
         return score;
     }
+    public void RestartGame()
+{
+    SceneManager.LoadScene("SampleScene");
+}
+    
 }
