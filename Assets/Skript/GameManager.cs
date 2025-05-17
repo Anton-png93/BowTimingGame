@@ -37,8 +37,8 @@ public class GameManager : MonoBehaviour
 
             foreach (ObstacleMover mover in obstacles)
             {
-                if (mover != null)
-                    mover.speed += 0.5f;
+               
+             
             }
 
             Debug.Log("Скорость увеличена! Текущие очки: " + score);
