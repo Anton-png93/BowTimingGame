@@ -25,14 +25,14 @@ public class TargetController : MonoBehaviour
 
     void Update()
     {
-        if (!isAutoMoving && GameManager.instance.GetScore() >= 100)
+        if (!isAutoMoving && GameManager.instance.GetScore() >= 70)
         {
             isAutoMoving = true;
         }
 
         if (isAutoMoving)
         {
-            int bonusSpeed = (GameManager.instance.GetScore() - 100) / 10;
+            int bonusSpeed = (GameManager.instance.GetScore() - 70) / 10;
             moveSpeed = 0.5f + bonusSpeed * 0.1f;
 
             float offset = Mathf.PingPong(Time.time * moveSpeed, moveAmplitude * 2) - moveAmplitude;
