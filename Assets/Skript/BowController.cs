@@ -6,6 +6,7 @@ public class BowController : MonoBehaviour
     public Transform shootPoint;
     public AudioSource bowShotSound;
     public GameObject arrowReady;
+    public ScoreManager scoreManager;
 
     private float arrowSpeed = 40f;
 
@@ -61,7 +62,9 @@ if ((Input.GetKeyDown(KeyCode.Space) ||
         bowShotSound.Play();
         arrowReady.SetActive(false);
 
+        
         GameObject arrow = Instantiate(arrowPrefab, shootPoint.position, Quaternion.identity);
+        arrow.GetComponent<Arrow>().scoreManager = scoreManager;
         Rigidbody2D rb = arrow.GetComponent<Rigidbody2D>();
         rb.linearVelocity = Vector2.up * arrowSpeed;
 
