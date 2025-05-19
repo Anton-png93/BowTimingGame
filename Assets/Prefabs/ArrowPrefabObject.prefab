@@ -178,7 +178,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   hitSound: {fileID: 2554079139271619093}
-  obstacleHitSound: {fileID: 2554079139271619093}
+  obstacleHitSound: {fileID: 0}
+  scoreManager: {fileID: 0}
 --- !u!82 &2554079139271619093
 AudioSource:
   m_ObjectHideFlags: 0

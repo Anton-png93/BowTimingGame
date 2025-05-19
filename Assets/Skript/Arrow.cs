@@ -54,8 +54,13 @@ public class Arrow : MonoBehaviour
         else
         {
             // Попали в препятствие
-            if (obstacleHitSound != null)
-                obstacleHitSound.Play();
+           GameObject obstacleGO = GameObject.Find("ObstacleSound");
+if (obstacleGO != null)
+{
+    AudioSource source = obstacleGO.GetComponent<AudioSource>();
+    if (source != null)
+        source.Play();
+}
 
                 // Отнимаем 1 секунду
                 TimerManager.instance.AddTime(-1f);
