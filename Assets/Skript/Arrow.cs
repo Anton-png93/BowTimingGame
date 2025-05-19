@@ -57,6 +57,10 @@ public class Arrow : MonoBehaviour
             if (obstacleHitSound != null)
                 obstacleHitSound.Play();
 
+                // Отнимаем 1 секунду
+                TimerManager.instance.AddTime(-1f);
+                Debug.Log("Попала в платформу! -1 секунда");
+
             transform.SetParent(collision.transform);
             Debug.Log("Стрела врезалась в " + collision.gameObject.name + " и теперь двигается с ним");
         }
