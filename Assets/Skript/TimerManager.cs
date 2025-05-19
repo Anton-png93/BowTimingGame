@@ -6,29 +6,29 @@ using UnityEngine.UI;
 public class TimerManager : MonoBehaviour
 
 {
-      public static TimerManager instance;
+    public static TimerManager instance;
     public GameObject GameOverCanvas;
     public TextMeshProUGUI finalScoreText;
     public TextMeshProUGUI finalRecordText;
 
-    private bool gameOverShown = false;    
+    private bool gameOverShown = false;
     public float startTime = 60f;
     private float currentTime;
     public TMP_Text timerText;
     public GameObject gameOverPanel;
     private bool isRunning = false;
     void Awake()
-{
-    instance = this;
-}
+    {
+        instance = this;
+    }
 
     void Start()
     {
-    currentTime = startTime;
-    gameOverPanel.SetActive(false);
-    StartTimer(); // ← добавь вот эту строку
+        currentTime = startTime;
+        gameOverPanel.SetActive(false);
+        StartTimer(); // ← добавь вот эту строку
     }
-    
+
 
     void Update()
     {
@@ -36,29 +36,30 @@ public class TimerManager : MonoBehaviour
 
         currentTime -= Time.deltaTime;
 
-       if (currentTime <= 0f && !gameOverShown)
-{
-    currentTime = 0f;
-    isRunning = false;
-    gameOverShown = true;
+        if (currentTime <= 0f && !gameOverShown)
+        {
+            currentTime = 0f;
+            isRunning = false;
+            gameOverShown = true;
 
-    GameOverCanvas.SetActive(true);
-    foreach (GameObject platform in GameObject.FindGameObjectsWithTag("Platform"))
-    Destroy(platform);
-    // Сохраняем рекорд, если текущий счёт больше
-int currentScore = GameManager.instance.GetScore();
-int bestScore = PlayerPrefs.GetInt("Record", 0);
+            GameOverCanvas.SetActive(true);
+            gameOverPanel.SetActive(true);
+            foreach (GameObject platform in GameObject.FindGameObjectsWithTag("Platform"))
+                Destroy(platform);
+            // Сохраняем рекорд, если текущий счёт больше
+            int currentScore = GameManager.instance.GetScore();
+            int bestScore = PlayerPrefs.GetInt("Record", 0);
 
-if (currentScore > bestScore)
-{
-    PlayerPrefs.SetInt("Record", currentScore);
-    PlayerPrefs.Save(); // Сохраняем изменения
-}
+            if (currentScore > bestScore)
+            {
+                PlayerPrefs.SetInt("Record", currentScore);
+                PlayerPrefs.Save(); // Сохраняем изменения
+            }
 
-    finalScoreText.text = "Score: " + GameManager.instance.GetScore().ToString();
-    finalRecordText.text = PlayerPrefs.GetInt("Record", 0).ToString(); // Если ты сохраняешь рекорд
-    Time.timeScale = 0f;
-}
+            finalScoreText.text = "Score: " + GameManager.instance.GetScore().ToString();
+            finalRecordText.text = PlayerPrefs.GetInt("Record", 0).ToString(); // Если ты сохраняешь рекорд
+            Time.timeScale = 0f;
+        }
 
         UpdateTimerUI();
     }
@@ -81,4 +82,9 @@ if (currentScore > bestScore)
     {
         currentTime += amount;
     }
+    public void RestartGame()
+{
+    Time.timeScale = 1f; // Сброс скорости игры на нормальную
+    SceneManager.LoadScene(SceneManager.GetActiveScene().name); // Перезапуск текущей сцены
+}
 }
