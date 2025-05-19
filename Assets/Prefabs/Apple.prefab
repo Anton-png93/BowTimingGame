@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 839639422246005289}
   - component: {fileID: 2750162703672414565}
   - component: {fileID: 5659444202056923934}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Apple
   m_TagString: Apple
   m_Icon: {fileID: 0}
@@ -77,7 +77,7 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: 0
+  m_SortingOrder: 1
   m_Sprite: {fileID: -6269976451504099588, guid: b7ca2aaad7b0dbd46849cf0672f40106, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
