@@ -1,3 +1,5 @@
+using System.Collections;
+using System.Collections.Generic;
 using UnityEngine;
 
 public class Arrow : MonoBehaviour
@@ -7,6 +9,7 @@ public class Arrow : MonoBehaviour
 
     private Rigidbody2D rb;
     private bool hasHit = false;
+    public ScoreManager scoreManager; // ссылка на объект, который управляет очками
 
     void Start()
     {
@@ -27,6 +30,16 @@ public class Arrow : MonoBehaviour
         GetComponent<Collider2D>().enabled = false;
 
         // Если попали в мишень
+        if (collision.collider.CompareTag("Apple"))
+{
+    // Добавляем очки
+    scoreManager.AddPoints(6);
+
+    // Добавляем время
+    TimerManager.instance.AddTime(6);
+
+    Debug.Log("🍏 Попадание в яблоко! +6 очков и +6 секунд!");
+}
         if (collision.gameObject.CompareTag("Target"))
         {
             if (hitSound != null)

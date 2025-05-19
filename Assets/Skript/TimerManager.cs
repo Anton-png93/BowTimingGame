@@ -6,6 +6,7 @@ using UnityEngine.UI;
 public class TimerManager : MonoBehaviour
 
 {
+      public static TimerManager instance;
     public GameObject GameOverCanvas;
     public TextMeshProUGUI finalScoreText;
     public TextMeshProUGUI finalRecordText;
@@ -16,6 +17,10 @@ public class TimerManager : MonoBehaviour
     public TMP_Text timerText;
     public GameObject gameOverPanel;
     private bool isRunning = false;
+    void Awake()
+{
+    instance = this;
+}
 
     void Start()
     {
