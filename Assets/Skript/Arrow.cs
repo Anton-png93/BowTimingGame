@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class Arrow : MonoBehaviour
 {
+    public AudioSource appleHitSound;
     public AudioSource hitSound;             // 🔊 Звук при попадании в мишень
     public AudioSource obstacleHitSound;     // 🔊 Звук при попадании в препятствие
 
@@ -31,15 +32,24 @@ public class Arrow : MonoBehaviour
 
         // Если попали в мишень
         if (collision.collider.CompareTag("Apple"))
-{
-    // Добавляем очки
-    scoreManager.AddPoints(6);
+        {
+            // Ищем объект со звуком яблока
+    GameObject appleGO = GameObject.Find("AppleSound");
+    if (appleGO != null)
+    {
+        AudioSource source = appleGO.GetComponent<AudioSource>();
+        if (source != null)
+            source.Play();
+    }
 
-    // Добавляем время
+    scoreManager.AddPoints(6);
     TimerManager.instance.AddTime(6);
 
     Debug.Log("🍏 Попадание в яблоко! +6 очков и +6 секунд!");
-}
+    transform.SetParent(collision.transform);
+    return;  
+    }
+    
         if (collision.gameObject.CompareTag("Target"))
         {
             if (hitSound != null)
@@ -51,20 +61,20 @@ public class Arrow : MonoBehaviour
             // Прикрепляем стрелу к мишени
             transform.SetParent(collision.transform);
         }
-        else
+        else if (collision.collider.CompareTag("Platform"))
         {
-            // Попали в препятствие
-           GameObject obstacleGO = GameObject.Find("ObstacleSound");
-if (obstacleGO != null)
-{
-    AudioSource source = obstacleGO.GetComponent<AudioSource>();
-    if (source != null)
-        source.Play();
-}
+            GameObject obstacleGO = GameObject.Find("ObstacleSound");
 
-                // Отнимаем 1 секунду
-                TimerManager.instance.AddTime(-1f);
-                Debug.Log("Попала в платформу! -1 секунда");
+            if (obstacleGO != null)
+            {
+                AudioSource source = obstacleGO.GetComponent<AudioSource>();
+                if (source != null)
+                    source.Play();
+            }
+
+            // Отнимаем 1 секунду
+            TimerManager.instance.AddTime(-1f);
+            Debug.Log("Попала в платформу! -1 секунда");
 
             transform.SetParent(collision.transform);
             Debug.Log("Стрела врезалась в " + collision.gameObject.name + " и теперь двигается с ним");
