@@ -56,7 +56,7 @@ public class TimerManager : MonoBehaviour
                 PlayerPrefs.Save(); // Сохраняем изменения
             }
 
-            finalScoreText.text = "Score: " + GameManager.instance.GetScore().ToString();
+            finalScoreText.text = " : " + GameManager.instance.GetScore().ToString();
             finalRecordText.text = PlayerPrefs.GetInt("Record", 0).ToString(); // Если ты сохраняешь рекорд
             Time.timeScale = 0f;
         }
