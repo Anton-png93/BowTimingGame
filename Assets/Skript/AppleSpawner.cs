@@ -12,7 +12,7 @@ public class AppleSpawner : MonoBehaviour
 
     void Update()
     {
-        if (!isSpawning && GameManager.instance.GetScore() >= 80)
+        if (!isSpawning && GameManager.instance.GetScore() >= 20)
         {
             isSpawning = true;
             SetNextSpawnTime();
@@ -31,7 +31,7 @@ public class AppleSpawner : MonoBehaviour
 
     void SetNextSpawnTime()
     {
-        timer = Random.Range(5f, 8f); // Случайное число от 5 до 8 секунд
+        timer = Random.Range(9f, 20f); // Случайное число от 5 до 8 секунд
     }
 
     void SpawnApple()

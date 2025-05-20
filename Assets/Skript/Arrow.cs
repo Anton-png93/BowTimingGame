@@ -42,8 +42,9 @@ public class Arrow : MonoBehaviour
             source.Play();
     }
 
-    scoreManager.AddPoints(6);
-    TimerManager.instance.AddTime(6);
+        GameManager.instance.AddScore(6); // Добавляем 6 очков к общему счёту
+        scoreManager.AddPoints(6);
+        TimerManager.instance.AddTime(6); // Добавляем 6 секунд
 
     Debug.Log("🍏 Попадание в яблоко! +6 очков и +6 секунд!");
     transform.SetParent(collision.transform);
