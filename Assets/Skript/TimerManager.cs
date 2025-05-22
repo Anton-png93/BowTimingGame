@@ -26,12 +26,13 @@ public class TimerManager : MonoBehaviour
     {
         currentTime = startTime;
         gameOverPanel.SetActive(false);
-        StartTimer(); // ← добавь вот эту строку
+       
     }
 
 
     void Update()
     {
+         Debug.Log("🌀 Update работает");
         if (!isRunning) return;
 
         currentTime -= Time.deltaTime;
@@ -47,7 +48,9 @@ public class TimerManager : MonoBehaviour
             foreach (GameObject platform in GameObject.FindGameObjectsWithTag("Platform"))
                 Destroy(platform);
             // Сохраняем рекорд, если текущий счёт больше
-            int currentScore = GameManager.instance.GetScore();
+           int currentScore = 0;
+        if (GameManager.instance != null)
+        currentScore = GameManager.instance.GetScore();
             int bestScore = PlayerPrefs.GetInt("Record", 0);
 
             if (currentScore > bestScore)
@@ -56,8 +59,10 @@ public class TimerManager : MonoBehaviour
                 PlayerPrefs.Save(); // Сохраняем изменения
             }
 
+          if (finalScoreText != null)
             finalScoreText.text = " : " + GameManager.instance.GetScore().ToString();
-            finalRecordText.text = PlayerPrefs.GetInt("Record", 0).ToString(); // Если ты сохраняешь рекорд
+            if (finalRecordText != null)
+            finalRecordText.text = PlayerPrefs.GetInt("Record", 0).ToString();
             Time.timeScale = 0f;
         }
 
@@ -72,10 +77,18 @@ public class TimerManager : MonoBehaviour
     }
 
     public void StartTimer()
+    
     {
-        isRunning = true;
-        currentTime = startTime;
-        Time.timeScale = 1f;
+    Debug.Log("🔥 StartTimer вызван");
+    isRunning = true;
+    currentTime = startTime;
+    // Спавним первую платформу
+    PlatformManager platformManager = FindObjectOfType<PlatformManager>();
+    if (platformManager != null)
+    {
+        platformManager.SpawnFirstPlatform();
+    }
+    Time.timeScale = 1f;
     }
 
     public void AddTime(float amount)

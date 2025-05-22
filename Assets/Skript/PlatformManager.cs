@@ -9,16 +9,17 @@ public class PlatformManager : MonoBehaviour
     private int lastPlatformScore = 0;
     private int currentPlatformIndex = 0;
 
-   void Start()
+    public void SpawnFirstPlatform()
 {
+    Debug.Log("🧱 Спавним первую платформу");
+
     if (currentPlatformIndex < spawnPoints.Length)
     {
         Instantiate(platformPrefab, spawnPoints[currentPlatformIndex].position, Quaternion.identity);
         currentPlatformIndex++;
-
-        // ВАЖНО: сохраняем стартовый счёт
-        lastPlatformScore = PlayerPrefs.GetInt("score", 0);
     }
+
+    lastPlatformScore = PlayerPrefs.GetInt("score", 0);
 }
 
     void Update()
