@@ -28,7 +28,13 @@ public class AppleSpawner : MonoBehaviour
             float randomX = Random.Range(-spawnXRange, spawnXRange);
             Vector3 spawnPosition = new Vector3(randomX, transform.position.y, 0);
 
-            Instantiate(applePrefab, spawnPosition, Quaternion.identity);
+            GameObject newApple = Instantiate(applePrefab, spawnPosition, Quaternion.identity);
+
+            Apple appleScript = newApple.GetComponent<Apple>();
+            appleScript.scoreManager = FindObjectOfType<ScoreManager>();
+            appleScript.timerManager = FindObjectOfType<TimerManager>();
+           
+            
         }
     }
 }

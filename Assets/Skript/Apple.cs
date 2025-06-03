@@ -2,7 +2,7 @@ using UnityEngine;
 
 public class Apple : MonoBehaviour
 {
-    public AudioSource hitSound;
+    public AudioSource hitSource;
     public TimerManager timerManager;
     public ScoreManager scoreManager;
 
@@ -10,16 +10,20 @@ public class Apple : MonoBehaviour
     {
         if (collision.collider.CompareTag("Arrow"))
         {
-            if (hitSound != null)
-                hitSound.Play();
+            if (hitSource != null)
+                hitSource.Play(); // Звук хруста
 
             if (timerManager != null)
-                timerManager.AddTime(6f);
+                timerManager.AddTime(6f);   // +6 секунд
 
             if (scoreManager != null)
-                scoreManager.AddPoints(6);
+                scoreManager.AddPoints(6);  // +6 очков
 
-            Destroy(gameObject);
+            // Закрепляем стрелу на яблоке
+            collision.collider.transform.SetParent(transform);
+            collision.collider.attachedRigidbody.bodyType = RigidbodyType2D.Kinematic;
+            collision.collider.attachedRigidbody.linearVelocity = Vector2.zero;
+            collision.collider.attachedRigidbody.angularVelocity = 0f;
         }
     }
 }
