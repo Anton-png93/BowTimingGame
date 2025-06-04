@@ -5,6 +5,14 @@ public class Apple : MonoBehaviour
     public AudioSource hitSource;
     public TimerManager timerManager;
     public ScoreManager scoreManager;
+      void Start()
+    {
+        GameObject target = GameObject.FindGameObjectWithTag("Target");
+        if (target != null)
+        {
+            Physics2D.IgnoreCollision(GetComponent<Collider2D>(), target.GetComponent<Collider2D>());
+        }
+    }
 
     void OnCollisionEnter2D(Collision2D collision)
     {
