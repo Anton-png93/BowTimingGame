@@ -1818,8 +1818,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   applePrefab: {fileID: 958911631846922720, guid: 8f7c912e79e3e024880ad0375ac9b1e8, type: 3}
-  spawnIntervalMin: 1
-  spawnIntervalMax: 3
+  spawnIntervalMin: 5
+  spawnIntervalMax: 10
   spawnXRange: 2.5
 --- !u!4 &1806929806
 Transform:
