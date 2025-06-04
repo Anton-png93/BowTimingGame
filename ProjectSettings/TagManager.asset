@@ -6,6 +6,8 @@ TagManager:
   tags:
   - Target
   - Arrow
+  - Apple
+  - Obstacle
   layers:
   - Default
   - TransparentFX
