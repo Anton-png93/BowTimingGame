@@ -19,6 +19,7 @@ public class GameManager : MonoBehaviour
 
         void Start()
     {
+    Time.timeScale = 0f; // Останавливаем игру при запуске   
     score = 0;              // 👈 ЗДЕСЬ ставь нужное число (например, 100)
     //UpdateScoreUI();          // ⬅ Обновляет текст на экране
     }
@@ -42,11 +43,18 @@ public class GameManager : MonoBehaviour
             Debug.Log("Скорость увеличена! Текущие очки: " + score);
         }
     }
+    void Update()
+{
+    if (Input.GetKeyDown(KeyCode.Escape))
+    {
+        Application.Quit();
+    }
+}
 
      //void UpdateScoreUI()
     //{
-       // scoreText.text = "SCORE: " + score.ToString();
-   // }
+    // scoreText.text = "SCORE: " + score.ToString();
+    // }
 
     public int GetScore()  // ← ВСТАВЬ СЮДА
     {
